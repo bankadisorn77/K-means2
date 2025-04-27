@@ -12,7 +12,7 @@ st.set_page_config(page_title='k-Means Clustering', layout='wide')
 # --- Sidebar for Configuration ---
 with st.sidebar:
     st.header("Configure Clustering")
-    k = st.slider('Select number of Clusters (k)', 2, 10, 3)
+    k = st.slider('Select number of Clusters (k)', 1, 10, 3)
 
 # --- Main Area ---
 st.title("k-Means Clustering Visualizer by Adisorn Saard")
@@ -25,10 +25,10 @@ X, _ = make_blobs(n_samples=300, centers=k, cluster_std=0.60, random_state=0)
 y_kmeans = model.fit_predict(X)
 
 # Plot
+y_kmeans = model.predict(X)
 fig, ax = plt.subplots()
 scatter = ax.scatter(X[:, 0], X[:, 1], c=y_kmeans, cmap='viridis')
-ax.scatter(model.cluster_centers_[:, 0], model.cluster_centers_[:, 1],
-           s=300, c='red', marker='*', label='Centroids')
-ax.set_title(f'k-Means Clustering (k={k})')
+ax.scatter(model.cluster_centers_[:, 0], model.cluster_centers_[:, 1], s=300, c='red', label='Centroids')
+ax.set_title('k-Means Clustering')
 ax.legend()
 st.pyplot(fig)
