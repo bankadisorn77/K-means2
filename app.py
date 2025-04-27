@@ -14,6 +14,7 @@ with open('kmeans_model.pkl', 'rb') as f:
 col1, col2 = st.columns([1, 3])
 
 with col1:
+    st.title("Configure Clustering")
     k = st.slider('Select number of Clustering (k)', 2, 10, 3)  # default should be inside the range (2-10)
 
 with col2:
@@ -21,7 +22,7 @@ with col2:
     st.title("k-Means Clustering Visualizer by Adisorn Saard")
 
     st.subheader('Example Data for Visualization')
-    st.markdown('This demo uses example 2D data to illustrate clustering results.')
+    # st.markdown('This demo uses example 2D data to illustrate clustering results.')
   
     # Load sample data
     X, _ = make_blobs(n_samples=300, centers=k, cluster_std=0.60, random_state=0)
@@ -30,9 +31,9 @@ with col2:
     try:
         y_kmeans = model.predict(X)
 
-        # 🎨 Plot
+        # Plot
         fig, ax = plt.subplots()
-        scatter = ax.scatter(X[:, 0], X[:, 1], c=k, cmap='viridis')
+        scatter = ax.scatter(X[:, 0], X[:, 1], c=y_kmeans, cmap='viridis')
         ax.scatter(model.cluster_centers_[:, 0], model.cluster_centers_[:, 1], s=300, c='red', label='Centroids')
         ax.set_title('k-Means Clustering')
         ax.legend()
