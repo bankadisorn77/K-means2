@@ -33,7 +33,8 @@ with col2:
         # 🎨 Plot
         fig, ax = plt.subplots()
         scatter = ax.scatter(X[:, 0], X[:, 1], c=y_kmeans, cmap='viridis')
-        ax.scatter(model.cluster_centers_[:, 0], model.cluster_centers_[:, 1], s=300, c='red', label='Centroids')
+        ax.scatter(model.cluster_centers_[:, 0], model.cluster_centers_[:, 1], 
+           s=300, c='red', marker='*', label='Centroids')
         ax.set_title('k-Means Clustering')
         ax.legend()
         st.pyplot(fig)
