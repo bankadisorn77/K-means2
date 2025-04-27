@@ -1,8 +1,9 @@
 import streamlit as st
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_blobs
-from sklearn.cluster import KMeans
 
+with open('kmeans_model.pkl', 'rb') as f:
+    model = pickle.load(f)
 # Set page config first
 st.set_page_config(page_title='k-Means Clustering', layout='wide')
 
@@ -20,8 +21,6 @@ st.markdown('This demo uses example 2D data to illustrate clustering results.')
 # Generate example data
 X, _ = make_blobs(n_samples=300, centers=k, cluster_std=0.60, random_state=0)
 
-# Train a new KMeans model with k clusters
-model = KMeans(n_clusters=k, random_state=0, n_init=10) # Added n_init for better convergence
 y_kmeans = model.fit_predict(X)
 
 # Plot
