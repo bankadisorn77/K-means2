@@ -1,4 +1,5 @@
 import streamlit as st
+import pickle
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_blobs
 
