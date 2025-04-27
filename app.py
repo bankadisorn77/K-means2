@@ -14,7 +14,7 @@ with open('kmeans_model.pkl', 'rb') as f:
 col1, col2 = st.columns([1, 3])
 
 with col1:
-    st.title("Configure Clustering")
+    st.markdown("Configure Clustering")
     k = st.slider('Select number of Clustering (k)', 2, 10, 3)  # default should be inside the range (2-10)
 
 with col2:
