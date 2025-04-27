@@ -12,7 +12,7 @@ st.set_page_config(page_title='Iris k-Means Clustering', layout='wide')
 # --- Sidebar for Configuration ---
 with st.sidebar:
     st.header("Configure Clustering")
-    k = st.slider('Select number of Clusters (k)', 2, 19, 3) # Adjusted max value to match image
+    k = st.slider('Select number of Clusters (k)', 2, 10, 3) # Adjusted max value to match image
 
 # --- Main Area ---
 st.title("🔍 K-Means Clustering App with Iris Dataset")
@@ -33,7 +33,7 @@ pca_df = pd.DataFrame(data=principal_components, columns=['PCA1', 'PCA2'])
 pca_df['Cluster'] = df['Cluster']
 
 # Create the scatter plot
-fig, ax = plt.subplots(figsize=(8, 6))
+fig, ax = plt.subplots(figsize=(6, 4))
 sns.scatterplot(x='PCA1', y='PCA2', hue='Cluster', data=pca_df, palette='viridis')
 ax.set_title('Clusters (2D PCA Projection)')
 ax.set_xlabel('PCA1')
