@@ -24,7 +24,7 @@ with col2:
   
     
     #load form a saved dataset
-    X, _ = make_blobs(n_samples = 300, centers = k, cluster_std = 0.60, random_state = 0)
+    X, _ = make_blobs(n_samples=300, centers=model.n_clusters, cluster_std=0.60, random_state=0)
     
     #Prideict
     y_kmeans = model.predict(X)
