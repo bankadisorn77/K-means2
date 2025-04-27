@@ -7,13 +7,14 @@ with open('kmeans_model.pkl','rb') as f:
     model = pickle.load(f)
     
 col1, col2 = st.columns([1, 3])
+st.set_page_config(page_title = 'k-Means Clustering', layout = 'centered')
     
 with col1:
     k = st.slider('Select number of Clustering(k)', 2, 10, 1)
     
 with col2:
     #set pafe cofig
-    st.set_page_config(page_title = 'k-Means Clustering', layout = 'centered')
+    
     
     #set title
     st.title("k-Means Clustering Visualizer by Adisorn Saard")
@@ -24,7 +25,7 @@ with col2:
   
     
     #load form a saved dataset
-    X, _ = make_blobs(n_samples=300, centers=model.n_clusters, cluster_std=0.60, random_state=0)
+    X, _ = make_blobs(n_samples=300, centers=k, cluster_std=0.60, random_state=0)
     
     #Prideict
     y_kmeans = model.predict(X)
