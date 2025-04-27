@@ -1,6 +1,7 @@
 import streamlit as st
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_blobs
+import pickle
 
 with open('kmeans_model.pkl', 'rb') as f:
     model = pickle.load(f)
