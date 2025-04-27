@@ -1,7 +1,14 @@
 import streamlit as st
+import pickle
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_blobs
-from sklearn.cluster import KMeans
+
+# Set page config
+st.set_page_config(page_title='k-Means Clustering', layout='centered')
+
+# Load model
+with open('kmeans_model.pkl', 'rb') as f:
+    model = pickle.load(f)
 
 # Set page config first
 st.set_page_config(page_title='k-Means Clustering', layout='wide')
@@ -16,19 +23,20 @@ st.title("k-Means Clustering Visualizer by Adisorn Saard")
 
 st.subheader('Example Data for Visualization')
 st.markdown('This demo uses example 2D data to illustrate clustering results.')
-
-# Generate example data
+# Load sample data
 X, _ = make_blobs(n_samples=300, centers=k, cluster_std=0.60, random_state=0)
 
-# 🔥 Train a new KMeans model with k clusters
-model = KMeans(n_clusters=k, random_state=0, n_init=10) # Added n_init for better convergence
-y_kmeans = model.fit_predict(X)
+# Predict using the model
+try:
+    y_kmeans = model.predict(X)
 
-# Plot
-fig, ax = plt.subplots()
-scatter = ax.scatter(X[:, 0], X[:, 1], c=y_kmeans, cmap='viridis')
-ax.scatter(model.cluster_centers_[:, 0], model.cluster_centers_[:, 1],
-           s=300, c='red', marker='*', label='Centroids')
-ax.set_title(f'k-Means Clustering (k={k})')
-ax.legend()
-st.pyplot(fig)
+    # 🎨 Plot
+    fig, ax = plt.subplots()
+    scatter = ax.scatter(X[:, 0], X[:, 1], c=y_kmeans, cmap='viridis')
+    ax.scatter(model.cluster_centers_[:, 0], model.cluster_centers_[:, 1], s=300, c='red', label='Centroids')
+    ax.set_title('k-Means Clustering')
+    ax.legend()
+    st.pyplot(fig)
+
+except Exception as e:
+    st.error(f"Prediction Error: {e}")
